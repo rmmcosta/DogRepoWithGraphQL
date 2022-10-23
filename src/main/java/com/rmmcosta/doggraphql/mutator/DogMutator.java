@@ -27,7 +27,7 @@ public class DogMutator {
     @MutationMapping
     public Dog updateDogName(@Argument String newName, @Argument Long id) {
         Optional<Dog> optionalDog = dogRepository.findById(id);
-        if (optionalDog.isEmpty()) {
+        if (optionalDog.isPresent()) {
             throw new DogException(id);
         }
         Dog dog = optionalDog.get();
