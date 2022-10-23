@@ -17,7 +17,7 @@ public class DogMutator {
 
     @MutationMapping
     public Dog newDog(@Argument String name, @Argument String breed,
-                          @Argument String origin) {
+                      @Argument String origin) {
 
         Dog dog = new Dog(name, breed, origin);
         dog = dogRepository.save(dog);
@@ -28,12 +28,13 @@ public class DogMutator {
     public Dog updateDogName(@Argument String newName, @Argument Long id) {
         Optional<Dog> optionalDog = dogRepository.findById(id);
         if (optionalDog.isPresent()) {
+            Dog dog = optionalDog.get();
+            dog.setName(newName);
+            dog = dogRepository.save(dog);
+            return dog;
+        } else {
             throw new DogException(id);
         }
-        Dog dog = optionalDog.get();
-        dog.setName(newName);
-        dog = dogRepository.save(dog);
-        return dog;
     }
 
     @MutationMapping

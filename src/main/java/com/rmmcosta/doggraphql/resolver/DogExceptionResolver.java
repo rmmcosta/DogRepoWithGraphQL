@@ -4,9 +4,14 @@ import com.rmmcosta.doggraphql.exception.DogException;
 import graphql.GraphQLError;
 import graphql.GraphqlErrorBuilder;
 import graphql.schema.DataFetchingEnvironment;
+import org.hibernate.exception.ConstraintViolationException;
+import org.hibernate.graph.Graph;
 import org.springframework.graphql.execution.DataFetcherExceptionResolverAdapter;
 import org.springframework.graphql.execution.ErrorType;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class DogExceptionResolver extends DataFetcherExceptionResolverAdapter {
